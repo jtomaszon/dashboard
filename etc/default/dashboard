@@ -1,0 +1,8 @@
+# defaults file for dashboard daemon mode
+DASHBOARD_ENABLE=true
+PID_FILE="/var/run/dashboard/publisher.pid"
+
+BIND="localhost"
+PORT="3000"
+
+DASHBOARD_OPTS="--interval=1 --debug --host=${BIND} --port=${PORT}"

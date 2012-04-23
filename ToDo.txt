@@ -1,0 +1,13 @@
+Administration:
+* debian package
+* init script
+* logrotate file
+
+Functionality:
+* Listen many websockets
+* Publish to many channels
+
+Frontend:
+ * Just one graphic?
+ * Multiple lines running?
+ * Other graphics?
