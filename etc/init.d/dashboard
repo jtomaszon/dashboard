@@ -1,7 +1,10 @@
 #! /bin/sh
 ### BEGIN INIT INFO
-# Default-Start:     2 3 4 5
-# Default-Stop:      
+# Provides: dashboard
+# Default-Start:  2 3 4 5
+# Default-Stop:
+# Required-Start:
+# Required-Stop:   
 ### END INIT INFO
 
 set -e
@@ -9,11 +12,12 @@ set -e
 
 NAME="Dashboard daemon"
 RUBY=$(which ruby)
-SERVER="/home/sysadmin/Dropbox/Repository/dashboard/server/publisher.rb"
+SERVER="/opt/dashboard/server/publisher.rb"
 DAEMON="$RUBY $SERVER"
 CONFIG_FILE="/etc/default/dashboard"
 
 test -x $RUBY || exit 0
+test -f $SERVER || exit 1
 
 . /lib/lsb/init-functions
 
