@@ -1,3 +1,6 @@
+var json = '{ "name": ["Africa", "America", "Asia", "Europe", "Oceania"], "data1800": [133, 156, 947, 408, 16]}';
+var categories = jQuery.parseJSON(json);
+
 var chart;
 $(document).ready(function() {
 	chart = new Highcharts.Chart({
@@ -12,7 +15,7 @@ $(document).ready(function() {
 			text: 'Source: Wikipedia.org'
 		},
 		xAxis: {
-			categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+			categories: categories.name,
 			title: {
 				text: null
 			}
@@ -44,9 +47,9 @@ $(document).ready(function() {
 			layout: 'vertical',
 			align: 'right',
 			verticalAlign: 'top',
-			x: -100,
+			x: 0,
 			y: 100,
-			floating: true,
+			floating: false,
 			borderWidth: 1,
 			backgroundColor: '#FFFFFF',
 			shadow: true
@@ -56,10 +59,10 @@ $(document).ready(function() {
 		},
 			series: [{
 			name: 'Year 1800',
-			data: [107, 31, 635, 203, 20]
+			data: categories.data1800
 		}, {
 			name: 'Year 1900',
-			data: [133, 156, 947, 408, 16]
+			data: [33, 56, 197, 40, 160]
 		}, {
 			name: 'Year 2008',
 			data: [973, 914, 454, 732, 34]

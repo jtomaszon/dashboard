@@ -2,7 +2,7 @@ var chart;
 $(document).ready(function() {
 	chart = new Highcharts.Chart({
 		chart: {
-			renderTo: 'mysql2_container',
+			renderTo: 'sqlsbus01',
 			plotBackgroundColor: null,
 			plotBorderWidth: null,
 			plotShadow: false,
@@ -10,6 +10,9 @@ $(document).ready(function() {
 		title: {
 			text: 'MySQL Commands'
 		},
+		subtitle: {
+			text: 'sqlsbus01'
+		},				
 		tooltip: {
 			formatter: function() {
 				return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
@@ -19,19 +22,20 @@ $(document).ready(function() {
 			pie: {
 				allowPointSelect: true,
 				cursor: 'pointer',
+				showInLegend: true,
 				dataLabels: {
-					enabled: true,
-					color: '#000000',
-					connectorColor: '#000000',
-					formatter: function() {
-						return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
-					}
+					enabled: false,
 				}
 			}
 		},
 		credits: {
 			enabled: false
 		},
+
+		exporting: {
+			enabled: false
+		},
+
 		series: [{
 			type: 'pie',
 			name: 'MySQL Commands',

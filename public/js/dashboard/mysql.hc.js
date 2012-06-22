@@ -1,15 +1,29 @@
+var json = '{ "id": "sqlmbus01", "name": "MySQL Commands", "server": "sqlmbus01", "commands": {"I": {"name": "Insert", "value": 2104634},"S":{"name":"Select","value": 33248373},"D": {"name": "Delete","value": 1570271},"U": {"name": "Update", "value": 15198281}}}';
+var database = jQuery.parseJSON(json);
+
+result = (function() {
+	var data = [];
+	$.each(database.commands, function() {
+		data.push([ this['name'], this['value'] ]);
+	});
+	return data;
+})()
+
 var chart;
 $(document).ready(function() {
 	chart = new Highcharts.Chart({
 		chart: {
-			renderTo: 'mysql_container',
+			renderTo: database.id,
 			plotBackgroundColor: null,
 			plotBorderWidth: null,
 			plotShadow: false,
 		},
 		title: {
-			text: 'MySQL Commands'
+			text: database.name
 		},
+		subtitle: {
+			text: database.server
+		},		
 		tooltip: {
 			formatter: function() {
 				return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
@@ -19,28 +33,24 @@ $(document).ready(function() {
 			pie: {
 				allowPointSelect: true,
 				cursor: 'pointer',
+				showInLegend: true,
 				dataLabels: {
-					enabled: true,
-					color: '#000000',
-					connectorColor: '#000000',
-					formatter: function() {
-						return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
-					}
+					enabled: false,
 				}
 			}
 		},
 		credits: {
 			enabled: false
 		},
+
+		exporting: {
+			enabled: false
+		},
+
 		series: [{
 			type: 'pie',
-			name: 'MySQL Commands',
-			data: [
-				['Insert',	2104634],
-				['Select',	33248373],
-				['Delete',	1570271],
-				['Update',	15198281]
-			]
+			name: database.name,
+			data: result
 		}]
 	});
 });
