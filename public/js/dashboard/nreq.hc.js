@@ -30,7 +30,7 @@ $(document).ready(function() {
                     var code300 = this.series[2];
 
 
-                    var conn = new WebSocket("ws://192.168.0.200:8082/");
+                    var conn = new WebSocket("ws://dashboard.kibibyte.net:8082/");
 
                     conn.onmessage = function(evt) {
                         var x = (new Date()).getTime();
