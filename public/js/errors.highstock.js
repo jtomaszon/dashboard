@@ -43,7 +43,7 @@ $(function() {
             line500 = this.series[1],
             line502 = this.series[2],
             line503 = this.series[3];
-						var conn = new WebSocket("ws://127.0.0.1:8081/");
+						var conn = new WebSocket("ws://127.0.0.1:8082/");
 
 						conn.onmessage = function(evt) {
 						  var x = (new Date()).getTime(),

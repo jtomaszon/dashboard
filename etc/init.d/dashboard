@@ -1,7 +1,10 @@
 #! /bin/sh
 ### BEGIN INIT INFO
+# Provides: dashboard
 # Default-Start:     2 3 4 5
 # Default-Stop:      
+# Required-Start:
+# Required-Stop: 
 ### END INIT INFO
 
 set -e

@@ -19,7 +19,7 @@ end
 def listener
   Thread.new do
     EventMachine.run do
-      EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8081) do |ws|
+      EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8082) do |ws|
         ws.onopen do
           logger "Creating socket"
           SOCKETS << ws
@@ -35,10 +35,10 @@ def listener
 end
 
 def sender
-  @redis = Redis.new(:host => '127.0.0.1', :post => 6379)
+  @redis = Redis.new(:host => '67.228.151.227', :post => 6379)
 
   Thread.new do
-    @redis.subscribe('ws') do |on|
+    @redis.subscribe('errors') do |on|
       on.message do |chan, msg|
         logger "sending message: #{msg}"
         SOCKETS.each {|s| s.send msg}

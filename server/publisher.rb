@@ -48,10 +48,14 @@ def server
     exit
   end
 
+  old = 0
+
   @listener = Thread.new do
     loop do
       data, addr = socket.recvfrom(1024)
-      @total += data.to_i
+      data = (data.to_i / 5)
+      @total = (data - old)
+      old = data
       logger "data received: #{data}"
     end
 
@@ -67,6 +71,10 @@ def publisher
   rescue
     logger "Redis down"
     exit
+  end
+
+  if not defined? $interval
+    $interval = 10
   end
 
   loop do
