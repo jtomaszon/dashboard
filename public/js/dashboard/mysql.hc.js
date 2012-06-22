@@ -1,22 +1,18 @@
-var json = [],
-database = "",
-result = "";
-var json = '{ "id": "sqlmbus01", "name": "MySQL Commands", "server": "sqlmbus01", "commands": {"I": {"name": "Ins", "value": 2104634},"S":{"name":"Sel","value": 33248373},"D": {"name": "Del","value": 1570271},"U": {"name": "Upd", "value": 15198281}}}';
-var database = jQuery.parseJSON(json);
+function renderChart(target) {
+	var json = '{ "id": "sqlmbus01", "name": "MySQL Commands", "server": "sqlmbus01", "commands": {"I": {"name": "Ins", "value": 2104634},"S":{"name":"Sel","value": 33248373},"D": {"name": "Del","value": 1570271},"U": {"name": "Upd", "value": 15198281}}}';
+	var database = jQuery.parseJSON(json);
 
-result = (function() {
-	var data = [];
-	$.each(database.commands, function() {
-		data.push([ this['name'], this['value'] ]);
-	});
-	return data;
-})()
-
-var chart;
-$(document).ready(function() {
-	chart = new Highcharts.Chart({
+	var result = (function() {
+		var data = [];
+		$.each(database.commands, function() {
+			data.push([ this['name'], this['value'] ]);
+		});
+		return data;
+	})()
+	
+	var chart = new Highcharts.Chart({
 		chart: {
-			renderTo: 'sqlmbus01',
+			renderTo: target,
 			plotBackgroundColor: null,
 			plotBorderWidth: null,
 			plotShadow: false,
@@ -54,6 +50,13 @@ $(document).ready(function() {
 			type: 'pie',
 			name: database.name,
 			data: result
-		}]
+			}]
+	});
+}
+
+$(document).ready(function() {
+	$(".mysqldata").each(function(){
+		target = $(this).attr('id');
+		renderChart(target);	
 	});
 });
