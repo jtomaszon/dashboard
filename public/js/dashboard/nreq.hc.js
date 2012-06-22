@@ -116,12 +116,15 @@ $(document).ready(function() {
 
 		series: [{
 			name: 'Code 200',
+			legendIndex: 1,
 			data: dataCreator
 		}, {
 			name: 'Code 500',
+			legendIndex: 3,
 			data: dataCreator
 		}, {
 			name: 'Code 300',
+			legendIndex: 2,
 			data: dataCreator
 		}]
 	});
