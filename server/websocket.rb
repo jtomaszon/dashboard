@@ -35,7 +35,7 @@ def listener
 end
 
 def sender
-  @redis = Redis.new(:host => '127.0.0.1', :post => 6379)
+  @redis = Redis.new(:host => '127.0.0.1', :port => 6379)
 
   Thread.new do
     @redis.subscribe('ws') do |on|
