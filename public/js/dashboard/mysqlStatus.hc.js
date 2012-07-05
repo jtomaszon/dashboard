@@ -17,7 +17,7 @@ $(document).ready(function() {
 	var chart;
 	chart = new Highcharts.Chart({
 		chart: {
-			renderTo: 'nginxRequests',
+			renderTo: 'mysqlStatus',
 			type: 'spline',
 			marginRight: 10,
 			marginRight: 130,
@@ -25,24 +25,27 @@ $(document).ready(function() {
             events : {
                 load : function() {
 
-                    var code200 = this.series[0];
-                    var code500 = this.series[1];
-                    var code300 = this.series[2];
+					var deletes = this.series[0];
+                    var inserts = this.series[1];
+                    var selects = this.series[2];
+                    var updates = this.series[3];
 
 
-                    var conn = new WebSocket("ws://dashboard.kibibyte.net:8082/");
+                    var conn = new WebSocket("ws://dashboard.kibibyte.net:8083/");
 
                     conn.onmessage = function(evt) {
                         var x = (new Date()).getTime();
                         var codes = evt.data.split(",");
 
-                        var y200 = parseFloat(codes[0]);
-                        var y300 = parseFloat(codes[1]);
-                        var y500 = parseFloat(codes[2]);
+                        var deletesPoint = parseFloat(codes[0]);
+                        var insertsPoint = parseFloat(codes[1]);
+                        var selectsPoint = parseFloat(codes[2]);
+                        var updatesPoint = parseFloat(codes[3]);
 
-                        code500.addPoint([x, y500], true, true);
-                        code300.addPoint([x, y300], true, true);
-                        code200.addPoint([x, y200], true, true);
+                        selects.addPoint([x, selectsPoint], true, true);
+                        inserts.addPoint([x, insertsPoint], true, true);
+                        updates.addPoint([x, updatesPoint], true, true);
+                        deletes.addPoint([x, deletesPoint], true, true);
 
                     };
 
@@ -53,10 +56,10 @@ $(document).ready(function() {
 
 		},
 		title: {
-			text: 'Live requests per second'
+			text: 'MySQL Status'
 		},
 		subtitle: {
-			text: 'Source: bbsld1lb03'
+			text: 'Source: MySQL Business Servers'
 		},
 		xAxis: {
 			type: 'datetime',
@@ -115,16 +118,20 @@ $(document).ready(function() {
 		},
 
 		series: [{
-			name: 'Code 200',
+			name: 'Delete',
 			legendIndex: 1,
 			data: dataCreator
 		}, {
-			name: 'Code 500',
+			name: 'Insert',
+			legendIndex: 2,
+			data: dataCreator
+		}, {
+			name: 'Select',
 			legendIndex: 3,
 			data: dataCreator
 		}, {
-			name: 'Code 300',
-			legendIndex: 2,
+			name: 'Update',
+			legendIndex: 4,
 			data: dataCreator
 		}]
 	});

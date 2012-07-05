@@ -11,6 +11,10 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+.DS_Store
+
+dashboard.sublime.sublime-project
+dashboard.sublime.sublime-workspace
 
 # YARD artifacts
 .yardoc
