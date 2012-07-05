@@ -65,16 +65,26 @@ $(document).ready(function() {
 			type: 'datetime',
 			tickPixelInterval: 120
 		},
-		yAxis: {
+		yAxis: [{
 			title: {
-				text: 'Requests'
+				text: 'Reads'
 			},
 			plotLines: [{
 				value: 0,
 				width: 2,
 				color: '#808080'
 			}]
-		},
+		}, {
+			title: {
+				text: 'Writes'
+			},
+			plotLines: [{
+				value: 0,
+				width: 2,
+				color: '#808080'
+			}],
+			opposite: true,
+		}],
 		tooltip: {
 			formatter: function() {
 					return '<b>'+ this.series.name +'</b><br/>'+
@@ -120,18 +130,22 @@ $(document).ready(function() {
 		series: [{
 			name: 'Delete',
 			legendIndex: 1,
+			yAxis: 1,
 			data: dataCreator
 		}, {
 			name: 'Insert',
 			legendIndex: 2,
+			yAxis: 1,
 			data: dataCreator
 		}, {
+			type: 'column',
 			name: 'Select',
 			legendIndex: 3,
 			data: dataCreator
 		}, {
-			name: 'Update',
+ 			name: 'Update',
 			legendIndex: 4,
+			yAxis: 1,
 			data: dataCreator
 		}]
 	});
