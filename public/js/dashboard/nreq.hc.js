@@ -36,7 +36,7 @@ $(document).ready(function() {
                         var x = (new Date()).getTime();
                         var codes = evt.data.split(",");
 
-                        var y200 = parseFloat(codes[0]);
+                        var y200 = parseFloat(codes[0]) + arseFloat(codes[1]);
                         var y300 = parseFloat(codes[1]);
                         var y500 = parseFloat(codes[2]);
 
