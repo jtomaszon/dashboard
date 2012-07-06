@@ -1,6 +1,6 @@
 dataCreator = (function() {
 	var data = [], time = (new Date()).getTime(), i;
-	for( i = -180; i <= 0; i++) {
+	for( i = -120; i <= 0; i++) {
 		data.push([ time + i * 1000, 0 ]);
 	}
 	return data;
@@ -60,7 +60,7 @@ $(document).ready(function() {
 		},
 		xAxis: {
 			type: 'datetime',
-			tickPixelInterval: 120
+			tickPixelInterval: 180
 		},
 		yAxis: {
 			title: {
@@ -107,7 +107,13 @@ $(document).ready(function() {
 						}
 					}
 				},
-			}, 			
+			}, 	
+			series: {
+				stickyTracking: false,
+				shadow: false,
+				turboThreshold: 10,
+
+			},			
 		},
 
 		credits: {

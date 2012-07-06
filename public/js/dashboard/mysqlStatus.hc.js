@@ -1,6 +1,6 @@
 dataCreator = (function() {
 	var data = [], time = (new Date()).getTime(), i;
-	for( i = -180; i <= 0; i++) {
+	for( i = -120; i <= 0; i++) {
 		data.push([ time + i * 1000, 0 ]);
 	}
 	return data;
@@ -25,28 +25,17 @@ $(document).ready(function() {
             events : {
                 load : function() {
 
-					var deletes = this.series[0];
-                    var inserts = this.series[1];
-                    var selects = this.series[2];
-                    var updates = this.series[3];
-
-
+                    var y = this.series;
                     var conn = new WebSocket("ws://dashboard.kibibyte.net:8083/");
 
                     conn.onmessage = function(evt) {
                         var x = (new Date()).getTime();
                         var codes = evt.data.split(",");
-
-                        var deletesPoint = parseFloat(codes[0]);
-                        var insertsPoint = parseFloat(codes[1]);
-                        var selectsPoint = parseFloat(codes[2]);
-                        var updatesPoint = parseFloat(codes[3]);
-
-                        selects.addPoint([x, selectsPoint], true, true);
-                        inserts.addPoint([x, insertsPoint], true, true);
-                        updates.addPoint([x, updatesPoint], true, true);
-                        deletes.addPoint([x, deletesPoint], true, true);
-
+                        for (i=0; i<=y.length; i++) {
+	                        y[i].addPoint([x, parseFloat(codes[i])], true, true);
+ 	
+                        }
+                       
                     };
 
                     conn.onclose = function(evt) {
@@ -63,7 +52,7 @@ $(document).ready(function() {
 		},
 		xAxis: {
 			type: 'datetime',
-			tickPixelInterval: 120
+			tickPixelInterval: 180
 		},
 		yAxis: [{
 			title: {
@@ -120,7 +109,13 @@ $(document).ready(function() {
 						}
 					}
 				},
-			}, 			
+			}, 	
+			series: {
+				stickyTracking: false,
+				shadow: false,
+				turboThreshold: 1000,
+
+			},
 		},
 
 		credits: {
@@ -129,7 +124,7 @@ $(document).ready(function() {
 
 		series: [{
 			name: 'Delete',
-			legendIndex: 1,
+			legendIndex: 4,
 			yAxis: 1,
 			data: dataCreator
 		}, {
@@ -140,11 +135,11 @@ $(document).ready(function() {
 		}, {
 			type: 'column',
 			name: 'Select',
-			legendIndex: 3,
+			legendIndex: 1,
 			data: dataCreator
 		}, {
  			name: 'Update',
-			legendIndex: 4,
+			legendIndex: 3,
 			yAxis: 1,
 			data: dataCreator
 		}]
