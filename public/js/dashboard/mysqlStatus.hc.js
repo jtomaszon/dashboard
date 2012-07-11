@@ -141,7 +141,8 @@ $(document).ready(function() {
  			name: 'Update',
 			legendIndex: 3,
 			yAxis: 1,
-			data: dataCreator
+			data: dataCreator,
+			color: '#000000'
 		}]
 	});
 });
