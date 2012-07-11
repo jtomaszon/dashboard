@@ -26,7 +26,7 @@ $(document).ready(function() {
                 load : function() {
 
                     var y = this.series;
-                    var conn = new WebSocket("ws://dashboard.kibibyte.net:8082/");
+                    var conn = new WebSocket("ws://dashboard.kibibyte.net:8084/");
 
                     conn.onmessage = function(evt) {
                         var x = (new Date()).getTime();

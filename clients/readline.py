@@ -3,18 +3,14 @@ import sys,time
 import redis
 
 l=0
-<<<<<<< HEAD
 code200=0
 code300=0
 code500=0
 
-=======
->>>>>>> 932320b89e44fe378c98800dc0ae5863318f0bfb
 e=int(time.time())
 r = redis.Redis("10.4.65.196")
 
 for line in sys.stdin:
-<<<<<<< HEAD
         ip, get, status, referer, other = line.split("\"",4)
         sts, bytes = status.strip().split(" ", 1)
 
@@ -30,12 +26,3 @@ for line in sys.stdin:
                 code200=0
                 code300=0
                 code500=0
-=======
-	t = int(time.time())
-	l += 1
-	if t > e:
-		e = t
-		#print "\"PUBLISH 'ws' "+str(l)+"\""
-		r.publish("ws", int(l))
-		l = 0
->>>>>>> 932320b89e44fe378c98800dc0ae5863318f0bfb
