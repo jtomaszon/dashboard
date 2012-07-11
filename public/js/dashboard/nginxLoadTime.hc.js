@@ -1,6 +1,6 @@
 dataCreator = (function() {
 	var data = [], time = (new Date()).getTime(), i;
-	for( i = -120; i <= 0; i++) {
+	for( i = -60; i <= 0; i++) {
 		data.push([ time + i * 1000, 0 ]);
 	}
 	return data;
@@ -43,7 +43,7 @@ $(document).ready(function() {
 
 		},
 		title: {
-			text: 'Live requests per second'
+			text: 'HTTP LoadTime'
 		},
 		subtitle: {
 			text: 'Source: bbsld1lb02'
@@ -54,7 +54,7 @@ $(document).ready(function() {
 		},
 		yAxis: {
 			title: {
-				text: 'Requests'
+				text: 'Seconds'
 			},
 			plotLines: [{
 				value: 0,
