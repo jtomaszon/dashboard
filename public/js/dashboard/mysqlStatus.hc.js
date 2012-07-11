@@ -33,9 +33,7 @@ $(document).ready(function() {
                         var codes = evt.data.split(",");
                         for (i=0; i<=y.length; i++) {
 	                        y[i].addPoint([x, parseFloat(codes[i])], true, true);
- 	
                         }
-                       
                     };
 
                     conn.onclose = function(evt) {

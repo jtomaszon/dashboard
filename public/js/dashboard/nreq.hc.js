@@ -25,25 +25,15 @@ $(document).ready(function() {
             events : {
                 load : function() {
 
-                    var code200 = this.series[0];
-                    var code500 = this.series[1];
-                    var code300 = this.series[2];
-
-
+                    var y = this.series;
                     var conn = new WebSocket("ws://dashboard.kibibyte.net:8082/");
 
                     conn.onmessage = function(evt) {
                         var x = (new Date()).getTime();
                         var codes = evt.data.split(",");
-
-                        var y200 = parseFloat(codes[0]) + parseFloat(codes[1]);
-                        var y300 = parseFloat(codes[1]);
-                        var y500 = parseFloat(codes[2]);
-
-                        code500.addPoint([x, y500], true, true);
-                        code300.addPoint([x, y300], true, true);
-                        code200.addPoint([x, y200], true, true);
-
+                        for (i=0; i<=y.length; i++) {
+	                        y[i].addPoint([x, parseFloat(codes[i])], true, true);
+                        }
                     };
 
                     conn.onclose = function(evt) {
@@ -107,6 +97,7 @@ $(document).ready(function() {
 						}
 					}
 				},
+
 			}, 	
 			series: {
 				stickyTracking: false,
