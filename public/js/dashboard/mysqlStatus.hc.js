@@ -31,7 +31,8 @@ $(document).ready(function() {
                     conn.onmessage = function(evt) {
                         var x = (new Date()).getTime();
                         var codes = evt.data.split(",");
-                        for (i=0; i<=y.length; i++) {
+
+                        for (i=0; i<y.length; i++) {
 	                        y[i].addPoint([x, parseFloat(codes[i])], true, true);
                         }
                     };
